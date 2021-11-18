@@ -22,21 +22,23 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.message)
     this.name = this.route.snapshot.params['name'];
   }
 
   getWelcomeMessage(){
     // subscribe() actually executes the request
     this.service.executeHelloWorldBeanService().subscribe(
-      response => this.handleSuccessfulResponse(response)
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
     );
-
-    console.log('last line of getWelcomeMessage');
   }
 
   handleSuccessfulResponse(response){
-    console.log(response.message);
+    this.welcomeMessageFromService = response.message;
+  }
+
+  handleErrorResponse(error){
+    this.welcomeMessageFromService = error.error.message;
   }
 
 }
