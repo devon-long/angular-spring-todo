@@ -23,6 +23,10 @@ export class TodoDataService {
     return this.http.get<Todo>(`http://localhost:8080/users/${username}/todos/${id}`);
     console.log('Hello from data service');
   }
+
+  updateTodo(username, id, todo){
+    return this.http.put(`http://localhost:8080/users/${username}/todos/${id}`, todo);
+  }
 }
 
 
